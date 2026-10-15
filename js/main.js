@@ -295,6 +295,8 @@ c.style.display = show ? "" : "none";
 // ---------- 图片灯箱（运行时自动绑定所有作品图；点空白退出；严格防锁滚动死锁） ----------
 // ---------- 图片灯箱（class 锁滚动 + 滚动事件拦截 + 图片自动绑定） ----------
 function initLightbox() {
+  return; // 2026-10-15: 禁用放大查看
+
   const box = document.querySelector(".lightbox");
   if (!box) return;
   // 保证挂到 body 直接子节点，fixed 绝对按视口居中（不被祖先 transform 降级）
@@ -312,84 +314,88 @@ function initLightbox() {
   const btnClose = box.querySelector(".close");
   const btnPrev  = box.querySelector(".nav.prev");
   const btnNext  = box.querySelector(".nav.next");
-  if (!box.querySelector(".lb-back")) {
-    const back = document.createElement("button");
-    back.className = "lb-back";
-    back.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span>返回</span>';
-    box.appendChild(back);
-    back.addEventListener("click", (e) => { e.stopPropagation(); closeLB(); });
-  }
-
   const galleries = {};
 
-  // ====== 绑定一个 DOM 元素（img/video） 到灯箱 ======
-  function bindOne(el, overrides) {
-    if (!el || el.__lbBound) return;
-    const src = (overrides && overrides.src) || el.dataset.src || el.currentSrc || el.src || el.getAttribute("src") || "";
-    if (!src) return;
-    const type = (overrides && overrides.type) || el.dataset.type || (el.tagName === "VIDEO" ? "video" : "image");
-    let g = (overrides && overrides.group) || el.dataset.lbGroup || "";
-    // 自动分组：优先 work-card.data-cat → section / article.id → 页面名
-    if (!g) {
-      const card = el.closest(".work-card, figure, .media-card, [data-cat], .award-card, .cert-card");
-      if (card) {
-        g = (card.dataset && card.dataset.cat) || (card.closest("[data-cat]") && card.closest("[data-cat]").dataset.cat) || null;
-        if (!g) {
-          const sec = card.closest("section[id], article[id], .page-content[id]");
-          g = sec && sec.id;
-        }
-      }
-      if (!g) {
-        const sec = el.closest("section, article, main");
-        g = sec && sec.id ? sec.id : (location.pathname.split("/").pop().replace(/.html.*/,"") || "page");
-      }
+  // ====== 绑定媒体放大（2026-10 恢复放大：卡片跳转不受影响，封面另给「放大」按钮） ======
+  const BLOCK_ROOT = ".navbar, footer, .lightbox, .video-controls, .is-clone";
+  function sourceOf(el, host) {
+    if (host && host.dataset && host.dataset.src) return host.dataset.src;
+    if (el.dataset && el.dataset.src) return el.dataset.src;
+    let src = el.currentSrc || el.getAttribute("src") || el.src || "";
+    if (!src && el.tagName === "VIDEO") {
+      const s = el.querySelector("source[src]");
+      if (s) src = s.getAttribute("src") || "";
     }
-    g = g || "gallery";
-    if (!galleries[g]) galleries[g] = [];
-    const rec = { src, type, trigger: el };
-    galleries[g].push(rec);
-    el.__lbBound = { g: g, i: galleries[g].length - 1 };
-    el.style.cursor = "zoom-in";
-    el.addEventListener("click", (ev) => {
-      const b = el.__lbBound;
-      if (!b) return;
-      // 不拦截：ctrl/meta/shift/alt click、_blank 链接、父元素已经是跳转时用户明显想跳转
-      if (ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey) return;
-      const anchor = el.closest("a[href]");
-      if (anchor && anchor.target === "_blank") return;
-      // 只有点元素本身（不是文字/按钮叠加）才放大。这里 img/video 点中就是元素自身。
-      ev.preventDefault();
-      ev.stopPropagation();
-      ev.stopImmediatePropagation();
-      openLB(b.g, b.i);
-    });
+    return src;
   }
-
-  // ===== 用户要求：全站取消「点击放大」交互（2026-08） =====
-  // 不再绑定任何 img/video 的 zoom-in 点击；下面的逻辑一律跳过。
-  // （保留 lightbox DOM + openLB/closeLB 本身，避免其他代码误调用时报错。）
-  return;
+  function groupOf(el, host) {
+    const g = (host && host.dataset && host.dataset.lbGroup) || (el.dataset && el.dataset.lbGroup);
+    if (g) return g;
+    const sec = el.closest("section[id], article[id]");
+    if (sec) return sec.id;
+    return (location.pathname.split("/").pop().replace(/\.html.*$/, "") || "page");
+  }
+  function pushMedia(el, host) {
+    const src = sourceOf(el, host);
+    if (!src) return null;
+    const g = groupOf(el, host) || "gallery";
+    if (!galleries[g]) galleries[g] = [];
+    galleries[g].push({ src: src, type: (el.tagName === "VIDEO") ? "video" : "image", trigger: host || el });
+    return { g: g, i: galleries[g].length - 1 };
+  }
+  function zoomIn(ev, bind) {
+    if (ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey) return;
+    ev.preventDefault();
+    ev.stopPropagation();
+    openLB(bind.g, bind.i);
+  }
+  // 带跳转的卡片：封面右上角挂一个「放大」按钮（点击不跳转，只放大）
+  function addZoomBtn(el) {
+    const cover = el.closest(".cover");
+    if (!cover || cover.__zoomBtn) return;
+    const bind = pushMedia(el, null);
+    if (!bind) return;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "cover-zoom";
+    btn.setAttribute("aria-label", "放大查看");
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6M11 8v6M8 11h6"/></svg>';
+    btn.addEventListener("click", function (ev) { zoomIn(ev, bind); });
+    cover.appendChild(btn);
+    cover.__zoomBtn = btn;
+  }
   function scanAndBind() {
-    const rootBlocks = EXCLUDE_ROOT.map(sel => document.querySelectorAll(sel));
-    document.querySelectorAll("img, video").forEach(el => {
+    document.querySelectorAll("img, video").forEach(function (el) {
       if (el.__lbBound) return;
-      // 排除：无 src、在排除容器内、或本身带排除属性
-      const tag = (el.tagName || "").toLowerCase();
-      let src = (tag === "img" ? (el.src || el.getAttribute("data-src") || "") : (el.src || el.getAttribute("data-src") || ""));
-      // <video><source src="..."></video>：video.src 为空时回退 source[0].src
-      if (!src && tag === "video") {
-        const sourceEl = el.querySelector("source[src]");
-        if (sourceEl) src = sourceEl.getAttribute("src") || sourceEl.src || "";
-      }
-      if (!src) return;
       if (el.hasAttribute("data-no-lightbox") || el.hasAttribute("data-lb-skip") || el.hasAttribute("data-icon")) return;
-      const inBlocked = rootBlocks.some(nodeList => Array.from(nodeList).some(root => root && root.contains(el)));
-      if (inBlocked) return;
-      // logo / nav 里的头像图：宽高都 < 48 就跳过
+      if (el.closest(BLOCK_ROOT)) return;
       const w = el.clientWidth || el.naturalWidth || el.width || 0;
       const h = el.clientHeight || el.naturalHeight || el.height || 0;
-      if (w && h && Math.max(w, h) <= 48) return;
-      bindOne(el, { type: tag === "video" ? "video" : "image" });
+      if (w && h && Math.max(w, h) <= 56) return;
+      if (!sourceOf(el, null)) return;
+      const anchor = el.closest("a");
+      const href = anchor && anchor.getAttribute("href");
+      el.__lbBound = true;
+      // 1) 卡片本身是跳转链接：点击继续跳转，封面右上角额外给一个放大入口
+      if (anchor && href && href !== "#") {
+        addZoomBtn(el);
+        return;
+      }
+      // 2) 无跳转的媒体容器：整块点击即放大（详情页常用）
+      if (anchor) {
+        if (anchor.__lbBound) return;
+        const bind = pushMedia(el, anchor);
+        if (!bind) return;
+        anchor.__lbBound = true;
+        anchor.style.cursor = "zoom-in";
+        anchor.addEventListener("click", function (ev) { zoomIn(ev, bind); });
+        return;
+      }
+      // 3) 独立图片 / 视频：点击即放大
+      const bind = pushMedia(el, null);
+      if (!bind) return;
+      el.style.cursor = "zoom-in";
+      el.addEventListener("click", function (ev) { zoomIn(ev, bind); });
     });
   }
   scanAndBind();
@@ -617,50 +623,49 @@ document.querySelectorAll("img[data-src], video[data-src]").forEach(el => io.obs
 }
 // ---------- audio 播放器波形（简单 canvas 柱状动画） ----------
 function initAudioWave() {
-document.querySelectorAll("audio.wave-audio").forEach(audio => {
-const canvas = audio.parentElement.querySelector("canvas.wave-canvas");
-if (!canvas) return;
-const ctx = canvas.getContext("2d");
-function resize() {
-const dpr = window.devicePixelRatio || 1;
-canvas.width = canvas.clientWidth * dpr;
-canvas.height = canvas.clientHeight * dpr;
-ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-}
-resize();
-window.addEventListener("resize", resize);
-const bars = 48;
-const h = canvas.clientHeight;
-const w = canvas.clientWidth;
-const bw = w / bars;
-let raf = 0;
-function draw() {
-ctx.clearRect(0, 0, w, h);
-const playing = !audio.paused;
-for (let i = 0; i < bars; i++) {
-let v;
-if (playing) {
-const seed = (i * 11 + performance.now() / 180) % 6.28;
-v = 0.35 + 0.55 * (0.5 + 0.5 * Math.sin(seed)) * (0.6 + 0.4 * Math.sin(i / 3));
-} else {
-v = 0.18 + 0.06 * Math.sin(i * 0.7);
-}
-const bh = Math.max(2, v * h);
-const x = i * bw + 1;
-const y = (h - bh) / 2;
-const grd = ctx.createLinearGradient(0, y, 0, y + bh);
-grd.addColorStop(0, "rgba(176,165,196,0.85)");
-grd.addColorStop(1, "rgba(138,163,196,0.35)");
-ctx.fillStyle = grd;
-const r = Math.min(2, (bw - 2) / 2);
-roundRect(ctx, x, y, bw - 2, bh, r);
-ctx.fill();
-}
-raf = requestAnimationFrame(draw);
-}
-cancelAnimationFrame(raf);
-draw();
-});
+  document.querySelectorAll("audio.wave-audio").forEach(function(audio) {
+    var wrap = audio.closest("div"), canvas;
+    // canvas 可能在 audio 的父级（音乐卡）任意位置
+    canvas = document.querySelector("canvas.wave-canvas");
+    if (!canvas || !canvas.isConnected) {
+      // 延迟到布局稳定再找
+      setTimeout(function() { initAudioWave(); }, 100);
+      return;
+    }
+    var ctx = canvas.getContext("2d");
+    var bars = 48;
+    var rafId = 0;
+
+    function draw() {
+      var w = canvas.clientWidth;
+      var h = canvas.clientHeight;
+      if (w === 0 || h === 0) { rafId = requestAnimationFrame(draw); return; }
+      ctx.clearRect(0, 0, w, h);
+      var playing = !audio.paused;
+      var bw = w / bars;
+      for (var i = 0; i < bars; i++) {
+        var v;
+        if (playing) {
+          var seed = (i * 11 + performance.now() / 180) % 6.28;
+          v = 0.40 + 0.55 * (0.5 + 0.5 * Math.sin(seed)) * (0.5 + 0.5 * Math.sin(i / 3));
+        } else {
+          v = 0.38 + 0.14 * Math.sin(i * 0.7 + performance.now() / 700);
+        }
+        var bh = Math.max(2, v * h);
+        var x = i * bw + 1;
+        var y = (h - bh) / 2;
+        var grd = ctx.createLinearGradient(0, y, 0, y + bh);
+        grd.addColorStop(0, "rgba(255,255,255,0.95)");
+        grd.addColorStop(1, "rgba(255,255,255,0.25)");
+        ctx.fillStyle = grd;
+        ctx.fillRect(x, y, Math.max(1.2, bw * 0.72), bh);
+      }
+      rafId = requestAnimationFrame(draw);
+    }
+    // 立即启动
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(draw);
+  });
 }
 function roundRect(ctx, x, y, w, h, r) {
 ctx.beginPath();
@@ -815,11 +820,254 @@ v.addEventListener('pause',show);
 v.addEventListener('play',hide);
 });
 }
+// ---------- 顶部滚动进度条 ----------
+function initScrollProgress() {
+let bar = document.querySelector(".scroll-progress");
+if (!bar) {
+bar = document.createElement("div");
+bar.className = "scroll-progress";
+document.body.appendChild(bar);
+}
+const update = () => {
+const h = document.documentElement.scrollHeight - window.innerHeight;
+const p = h > 0 ? Math.min(1, Math.max(0, (window.scrollY || window.pageYOffset || 0) / h)) : 0;
+bar.style.width = (p * 100) + "%";
+};
+window.addEventListener("scroll", update, { passive: true });
+window.addEventListener("resize", update);
+update();
+}
+// ---------- 导航：作品集分类下拉（触屏点击展开，桌面悬停） ----------
+function initNavDropdown() {
+document.querySelectorAll(".nav-dd").forEach(dd => {
+const trigger = dd.querySelector("a");
+if (!trigger) return;
+trigger.addEventListener("click", e => {
+const hoverable = window.matchMedia("(hover: hover)").matches && window.innerWidth > 768;
+if (hoverable) return; // 桌面端悬停即展开，点击照常跳转
+e.preventDefault();
+dd.classList.toggle("open");
+});
+});
+document.addEventListener("click", e => {
+if (e.target.closest(".nav-dd")) return;
+document.querySelectorAll(".nav-dd.open").forEach(d => d.classList.remove("open"));
+});
+}
+// ---------- Hero：漂浮星点 + 轻微视差 ----------
+function initHeroFloat() {
+const hero = document.querySelector(".hero");
+if (!hero) return;
+if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+const spots = [[12, 24], [83, 19], [19, 70], [88, 63], [51, 15], [69, 82]];
+spots.forEach((p, i) => {
+const el = document.createElement("span");
+el.className = "hero-float";
+el.setAttribute("aria-hidden", "true");
+el.style.left = p[0] + "%";
+el.style.top = p[1] + "%";
+el.style.animationDelay = (i * 0.9) + "s";
+el.style.animationDuration = (8 + i * 1.4) + "s";
+el.innerHTML = window.STAR_SVG_SM;
+hero.appendChild(el);
+});
+const bg = hero.querySelector("img");
+if (!bg || window.matchMedia("(hover: none)").matches) return;
+hero.addEventListener("pointermove", e => {
+const cx = e.clientX / window.innerWidth - 0.5;
+const cy = e.clientY / window.innerHeight - 0.5;
+bg.style.transform = "scale(1.06) translate(" + (cx * -16).toFixed(1) + "px," + (cy * -16).toFixed(1) + "px)";
+});
+hero.addEventListener("pointerleave", () => { bg.style.transform = ""; });
+}
+// ---------- 技能卡 / 快捷入口 3D 倾斜 ----------
+function initTilt() {
+if (!window.matchMedia("(hover: hover)").matches) return;
+if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+document.querySelectorAll(".skill-group, .reveal-grid > a").forEach(el => {
+el.classList.add("tilt");
+el.addEventListener("pointermove", e => {
+const r = el.getBoundingClientRect();
+const px = (e.clientX - r.left) / r.width - 0.5;
+const py = (e.clientY - r.top) / r.height - 0.5;
+el.style.transform = "perspective(900px) rotateY(" + (px * 6).toFixed(2) + "deg) rotateX(" + (-py * 6).toFixed(2) + "deg) translateY(-6px)";
+});
+el.addEventListener("pointerleave", () => { el.style.transform = ""; });
+});
+}
+// ---------- 精选作品：叠放式轮播（中心最大 + 两侧小且靠内叠放 + 循环 + 拖拽） ----------
+function initCarousel() {
+const root = document.querySelector("[data-carousel]");
+if (!root) return;
+const viewport = root.querySelector(".carousel-viewport");
+const track = root.querySelector(".carousel-track");
+if (!viewport || !track) return;
+const slides = Array.prototype.slice.call(track.querySelectorAll(".carousel-slide"));
+const n = slides.length;
+if (!n) return;
+const dotsWrap = root.querySelector(".carousel-dots");
+const countEl = root.querySelector(".carousel-count");
+const prevBtn = root.querySelector(".carousel-arrow.prev");
+const nextBtn = root.querySelector(".carousel-arrow.next");
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const pad = v => String(v).padStart(2, "0");
+
+let active = 0;   // 中心 slide 的逻辑 index（0..n-1 循环）
+
+// 指示点
+const dots = [];
+if (dotsWrap) {
+dotsWrap.innerHTML = "";
+for (let i = 0; i < n; i++) {
+const d = document.createElement("button");
+d.type = "button";
+d.className = "carousel-dot";
+d.setAttribute("aria-label", "第 " + (i + 1) + " 件作品");
+d.addEventListener("click", () => { stopAuto(); go(i); });
+dotsWrap.appendChild(d);
+dots.push(d);
+}
+}
+
+// 把逻辑 index → 循环距离（-floor(n/2) .. +floor(n/2)）
+function dist(i) {
+let d = i - active;
+const half = Math.floor(n / 2);
+// 把 d 映射到最近方向（0 总是 0）
+if (d > half) d -= n;
+else if (d < -half) d += n;
+return d;
+}
+
+function layout() {
+slides.forEach((s, i) => {
+const d = dist(i);
+// 清理所有状态 class
+s.classList.remove("is-center", "is-near", "is-far", "is-back");
+s.style.setProperty("--offset", "0");
+if (d === 0) {
+s.classList.add("is-center");
+s.removeAttribute("aria-hidden"); s.tabIndex = 0;
+} else if (Math.abs(d) === 1) {
+s.classList.add("is-near");
+s.style.setProperty("--offset", String(d));
+s.setAttribute("aria-hidden", "true"); s.tabIndex = -1;
+} else if (Math.abs(d) === 2) {
+s.classList.add("is-far");
+s.style.setProperty("--offset", String(d));
+s.setAttribute("aria-hidden", "true"); s.tabIndex = -1;
+} else {
+s.classList.add("is-back");
+s.setAttribute("aria-hidden", "true"); s.tabIndex = -1;
+}
+});
+dots.forEach((d, i) => d.classList.toggle("active", i === active));
+if (countEl) countEl.innerHTML = "<b>" + pad(active + 1) + "</b> / " + pad(n);
+}
+
+function go(i) {
+active = ((i % n) + n) % n;
+layout();
+}
+
+// 点击非中心 slide → 它滑到中间（用户要的"鼠标选择放大并且自动滑动居中"）
+viewport.addEventListener("click", e => {
+if (e.target.closest(".cover-zoom, .carousel-arrow, .carousel-dot")) return;
+const slide = e.target.closest(".carousel-slide");
+if (!slide) return;
+const j = slides.indexOf(slide);
+if (j < 0) return;
+if (j === active) return;
+e.preventDefault();
+e.stopPropagation();
+stopAuto();
+go(j);
+}, true);
+
+// 拖拽（拖 viewport → 松手 snap 到最近相邻项）
+let down = false, sx = 0, sy = 0, moved = false, lockClick = false, dragStart = active;
+viewport.addEventListener("pointerdown", e => {
+if (e.button && e.button !== 0) return;
+if (e.target.closest(".carousel-arrow, .cover-zoom")) return;
+down = true; moved = false; lockClick = false; dragStart = active;
+sx = e.clientX; sy = e.clientY;
+viewport.classList.add("is-dragging");
+try { viewport.setPointerCapture(e.pointerId); } catch (err) {}
+});
+viewport.addEventListener("pointermove", e => {
+if (!down) return;
+const dx = e.clientX - sx, dy = e.clientY - sy;
+if (!moved) {
+if (Math.abs(dx) < 8 || Math.abs(dx) < Math.abs(dy)) return;
+moved = true; lockClick = true; stopAuto();
+}
+// 实时预览拖拽方向：dx < 0 → 下一张，dx > 0 → 上一张
+let dir = 0;
+if (dx < -40) dir = 1;
+else if (dx > 40) dir = -1;
+if (dir !== 0) {
+const next = ((dragStart + dir) % n + n) % n;
+if (next !== active) go(next);
+}
+});
+function endDrag() {
+if (!down) return;
+down = false;
+viewport.classList.remove("is-dragging");
+if (!moved) { /* 没拖 = 点击事件会处理 */ }
+setTimeout(() => { lockClick = false; }, 80);
+}
+viewport.addEventListener("pointerup", endDrag);
+viewport.addEventListener("pointercancel", endDrag);
+
+// 箭头 / 键盘
+prevBtn && prevBtn.addEventListener("click", () => { stopAuto(); go(active - 1); });
+nextBtn && nextBtn.addEventListener("click", () => { stopAuto(); go(active + 1); });
+root.addEventListener("keydown", e => {
+if (e.key === "ArrowRight") { e.preventDefault(); stopAuto(); go(active + 1); }
+else if (e.key === "ArrowLeft") { e.preventDefault(); stopAuto(); go(active - 1); }
+});
+
+// 自动播放（5.6s 切一张，hover 停）
+let auto = 0;
+function startAuto() {
+if (auto || reduce) return;
+auto = setInterval(() => { go(active + 1); }, 5600);
+}
+function stopAuto() { clearInterval(auto); auto = 0; }
+// 鼠标悬停不暂停自动播放；但手动交互（点击/拖拽）会 stopAuto，pointerleave 后恢复
+root.addEventListener("pointerleave", startAuto);
+document.addEventListener("visibilitychange", () => { if (document.hidden) stopAuto(); else startAuto(); });
+window.addEventListener("resize", () => layout());
+
+// 入场 armed：先加 armed 禁止过渡 → layout() 瞬间摆到位 → 滚到视口后 remove armed 恢复平滑切换
+root.classList.add("carousel-armed");
+layout();
+startAuto();
+
+if ("IntersectionObserver" in window) {
+const io = new IntersectionObserver(entries => {
+entries.forEach(en => {
+if (!en.isIntersecting) return;
+root.classList.remove("carousel-armed");
+io.disconnect();
+});
+}, { threshold: 0.25 });
+io.observe(viewport);
+} else {
+root.classList.remove("carousel-armed");
+}
+}
 // ---------- 启动 ----------
 document.addEventListener("DOMContentLoaded", () => {
 initNav();
+initScrollProgress();
+initNavDropdown();
+initHeroFloat();
+initCarousel();
 initReveal();
 initFilter();
+initTilt();
 initLightbox();
 initPageTransition();
 initCopy();

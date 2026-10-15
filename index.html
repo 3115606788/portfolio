@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>数字媒体创作者 × AI 视觉实验者</title>
 <meta name="description" content="个人作品集：After Effects 动态视觉、ComfyUI / Stable Diffusion / WebUI AI 生成艺术、信息可视化、原创海洋 IP 设计、网页与交互开发。" />
-<meta property="og:title" content="个人作品集" />
-<meta property="og:description" content="数字媒体创作者 × AI 视觉实验者" />
+<meta property="og:title" content="数字媒体创作者 × AI 视觉实验者" />
+<meta property="og:description" content="个人作品集：After Effects 动态视觉、ComfyUI / Stable Diffusion / WebUI AI 生成艺术、信息可视化、原创海洋 IP 设计、网页与交互开发。" />
 <meta property="og:image" content="assets/images/hero-bg.jpg" />
-<link rel="stylesheet" href="css/main.css" />
 <link rel="preload" as="image" href="assets/images/hero-bg.jpg" />
+<link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
 <!-- ========== 顶部导航 ========== -->
@@ -33,295 +33,265 @@
 <li><a href="awards.html"><span class="t-cn">荣誉</span><span class="t-en">Awards</span></a></li>
 </ul>
 <div class="nav-actions">
-<button class="hamburger" aria-label="菜单">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-<path d="M4 7h16M4 12h16M4 17h16"/>
-</svg>
-</button>
-</div>
+<button class="hamburger" aria-label="菜单"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 </div>
 </div>
 </header>
+
 <!-- ========== Hero 首屏 ========== -->
-<section class="hero" style="position:relative; width:100vw; height:100vh; overflow:hidden; z-index:1;">
-<!-- 背景图：100vw×100vh，object-fit:cover 不变形 -->
-<img src="assets/images/hero-bg.jpg" alt="首屏背景" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center center; pointer-events:none;" />
-<!-- 渐变遮罩：从底部往上加深 + 轻微顶部 -->
-<div style="position:absolute; inset:0; background:
-linear-gradient(180deg, rgba(10,13,20,0.15) 0%, rgba(10,13,20,0.25) 45%, rgba(10,13,20,0.85) 100%),
-radial-gradient(80% 60% at 50% 30%, rgba(138,163,196,0.10), transparent 60%);"></div>
-<div class="container" style="height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding-top:82px;">
-<div class="reveal" style="display:inline-flex; align-items:center; gap:10px; padding:6px 16px; border:1px solid rgba(168,190,220,0.3); border-radius:999px; background:rgba(10,13,20,0.3); backdrop-filter:blur(8px); margin-bottom:28px;">
-<svg class="icon-star sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">
-<path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.2"/>
-</svg>
-<span style="font-family:var(--font-en); font-size:11px; letter-spacing:0.4em; color:var(--mist-blue-soft); text-transform:uppercase;">Portfolio · 2026</span>
+<section class="hero">
+<img src="assets/images/hero-bg.jpg" alt="" />
+
+<span class="hero-float" style="top:18%; left:14%; width:14px; height:14px;">
+<svg class="icon-star" viewBox="0 0 24 24" fill="currentColor" fill-opacity=".35"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"/></svg>
+</span>
+<span class="hero-float" style="top:28%; left:78%; width:18px; height:18px; animation-delay: 1.2s;">
+<svg class="icon-star" viewBox="0 0 24 24" fill="currentColor" fill-opacity=".25"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"/></svg>
+</span>
+<span class="hero-float" style="top:68%; left:8%; width:12px; height:12px; animation-delay: 2.4s;">
+<svg class="icon-star" viewBox="0 0 24 24" fill="currentColor" fill-opacity=".30"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"/></svg>
+</span>
+<span class="hero-float" style="top:76%; left:86%; width:16px; height:16px; animation-delay: 3.6s;">
+<svg class="icon-star" viewBox="0 0 24 24" fill="currentColor" fill-opacity=".22"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"/></svg>
+</span>
+
+<div class="hero-content">
+<div class="eyebrow reveal" data-delay="0">
+<svg class="icon-star sm" viewBox="0 0 24 24" fill="currentColor" fill-opacity=".25"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"/></svg>
+<span>Portfolio · 2026</span>
 </div>
-<h1 class="reveal" data-delay="1" style="margin:0; font-size: clamp(42px, 7vw, 88px); font-weight:200; letter-spacing:0.14em; color:#fff; line-height:1.15; text-shadow: 0 6px 30px rgba(0,0,0,.4);">
-<span undefined>数字媒体创作者</span>
-<span style="display:inline-block; margin:0 .4em; color:var(--mist-blue-soft);">×</span>
-<span style="display:inline-block; margin-top:0.15em;">AI 视觉实验者</span>
+<h1 class="hero-title reveal" data-delay="1">
+数字媒体创作者
+<span class="en">AI 视觉实验者</span>
 </h1>
-<p class="reveal" data-delay="2" style="margin:24px 0 44px; color:rgba(230,234,242,0.78); letter-spacing:0.25em; font-size: clamp(12px, 1.3vw, 15px);">东方质感 × 赛博语言 × 跨媒介表达</p>
-<div class="reveal" data-delay="3" style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
-<a href="works.html" class="btn primary">
-<svg class="icon-star sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.25"/></svg>
-<span undefined>查看作品集</span>
+<p class="hero-sub reveal" data-delay="2">东方质感 × 赛博语言 × 跨媒介表达</p>
+<div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;" class="reveal" data-delay="3">
+<a class="btn primary" href="works.html">查看作品集</a>
+<a class="btn" href="awards.html">荣誉证书</a>
+</div>
+</div>
+
+<a class="scroll-cue" href="#carousel-section" aria-label="向下滚动探索作品">
+<span>向下滚动 探索作品</span>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 5v14M6 13l6 6 6-6"/>
+</svg>
 </a>
-<a href="awards.html" class="btn"><span undefined>荣誉证书</span>
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-</a>
-</div>
-<!-- 底部滚动提示 -->
-<div class="reveal" data-delay="4" style="position:absolute; bottom:36px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; color:rgba(230,234,242,0.7);">
-<span style="font-family:var(--font-en); font-size:10px; letter-spacing:0.4em;">向下滚动 探索作品</span>
-<span style="width:1px; height:42px; background:linear-gradient(180deg, var(--mist-blue-soft), transparent); animation: scrollLine 2.4s ease-in-out infinite;"></span>
-</div>
-</div>
 </section>
-<style>@keyframes scrollLine { 0%{transform:scaleY(.2); transform-origin:top; opacity:.4;} 50%{transform:scaleY(1); opacity:1;} 100%{transform:scaleY(.2); transform-origin:bottom; opacity:.4;} }</style>
-<!-- ========== 精选作品 ========== -->
-<main>
-<section class="section" id="featured">
+
+<!-- ========== 精选作品 coverflow 轮播 ========== -->
+<section id="carousel-section" class="section" style="padding-top:90px;">
 <div class="container">
-<div class="reveal" style="display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap;">
-<div>
-<div class="eyebrow">
-<svg class="icon-star sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.2"/></svg>
-<span undefined>Selected Works</span>
-</div>
+<div class="reveal">
 <h2 class="section-title">
-<span undefined>精选代表作</span>
-<span class="en">Representative Pieces across 6 Categories</span>
+<span>精选作品 · 7 件代表作</span>
+<span class="en">Curated Selection · Coverflow</span>
 </h2>
+<p class="section-desc">覆盖 AI 影像、信息可视化、IP 设计与网页交互四条线索，按创作脉络排列。</p>
 </div>
-<a class="btn" href="works.html" style="margin-bottom:12px;">
-<span undefined>作品集</span>
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-</a>
-</div>
-<p class="section-desc reveal" data-delay="1">从六个创作类别中挑选的 8 件代表作，点击卡片进入聚合详情页。</p>
-<div class="work-grid">
-<!-- 画皮交互绘本（首页精选 01 位），分类归属 C5 网页与交互，跳 work-web.html -->
-<a class="work-card glass-card reveal" data-delay="1" data-cat="c5" href="work-web.html">
+
+<div class="carousel" data-carousel aria-roledescription="carousel">
+
+<button class="carousel-arrow prev" type="button" aria-label="上一件作品">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+</button>
+
+<div class="carousel-viewport">
+<div class="carousel-track">
+
+<!-- 1. 画皮 · 交互绘本 -->
+<a class="work-card glass-card carousel-slide" data-cat="c5" href="work-web.html">
 <div class="cover">
-<img src="assets/images/huapi-cover.jpg" alt="画皮交互绘本 封面" loading="lazy" />
-<div class="cta"><span undefined>查看交互绘本</span>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+<img src="assets/images/huapi-cover.jpg" alt="画皮 · 交互绘本" loading="lazy" />
+<div class="cta"><span>查看详情</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
 </div>
-</div>
-<div class="meta">
-<h3>画皮 · 交互绘本</h3>
-<div class="tags"><span class="tag purple">国风 IP</span><span class="tag warm">翻页交互</span><span class="tag">AIGC 批量产图</span></div>
-</div>
+<div class="meta"><h3>画皮 · 交互绘本</h3><div class="tags"><span class="tag">国风 IP</span><span class="tag">翻页交互</span><span class="tag">AIGC 批量产图</span></div></div>
 </a>
-<!-- 动态视觉 -->
-<a class="work-card glass-card reveal" data-delay="2" data-cat="c1" href="work-motion.html">
+
+<!-- 2. AI 影像与创作（video） -->
+<a class="work-card glass-card carousel-slide" data-cat="c1" href="work-ai-motion.html">
 <div class="cover">
-<video class="preview" muted loop playsinline data-poster="assets/images/ae-project-screenshot-1.jpg">
-<source src="assets/videos/ae-poster-loop-character.mp4" type="video/mp4" />
-</video>
-<div class="play-pulse" aria-hidden="true">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+<video src="assets/videos/ae-poster-loop-character.mp4" poster="assets/images/ae-project-screenshot-1.jpg" muted loop playsinline></video>
+<div class="play-pulse" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+<div class="cta"><span>查看详情</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
 </div>
-<div class="cta"><span undefined>查看详情</span>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-</div>
-</div>
-<div class="meta">
-<h3>动态视觉与影像</h3>
-<div class="tags"><span class="tag">After Effects</span><span class="tag purple">AI 影像</span><span class="tag warm">Music</span></div>
-</div>
+<div class="meta"><h3>AI 影像与创作</h3><div class="tags"><span class="tag">After Effects</span><span class="tag">ComfyUI</span><span class="tag">LoRA</span><span class="tag">AI Agent</span></div></div>
 </a>
-<!-- AI 创作 -->
-<a class="work-card glass-card reveal" data-delay="2" data-cat="c2" href="work-ai.html">
-<div class="cover">
-<img src="assets/images/comfyui-workflow-lora.png" alt="ComfyUI 工作流" loading="lazy" />
-<div class="cta"><span undefined>查看详情</span>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-</div>
-</div>
-<div class="meta">
-<h3>AI 创作与技术</h3>
-<div class="tags"><span class="tag">ComfyUI</span><span class="tag purple">LoRA</span><span class="tag">WebUI</span></div>
-</div>
-</a>
-<!-- 信息可视化 -->
-<a class="work-card glass-card reveal" data-delay="3" data-cat="c3" href="work-viz.html">
+
+<!-- 3. 信息可视化 -->
+<a class="work-card glass-card carousel-slide" data-cat="c3" href="work-viz.html">
 <div class="cover">
 <img src="assets/images/visualization-1.jpg" alt="信息可视化" loading="lazy" />
-<div class="cta"><span undefined>查看详情</span>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+<div class="cta"><span>查看详情</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
 </div>
-</div>
-<div class="meta">
-<h3>信息可视化</h3>
-<div class="tags"><span class="tag">NCDA · 国一</span><span class="tag warm">数据叙事</span></div>
-</div>
+<div class="meta"><h3>信息可视化</h3><div class="tags"><span class="tag purple">NCDA · 国一</span><span class="tag">数据叙事</span></div></div>
 </a>
-<!-- 海洋 IP -->
-<a class="work-card glass-card reveal" data-delay="4" data-cat="c4" href="work-ip.html">
+
+<!-- 4. 角色与 IP 设计 -->
+<a class="work-card glass-card carousel-slide" data-cat="c4" href="work-ip.html">
 <div class="cover">
-<img src="assets/images/ip-daixiaoyuan.jpg" alt="原创 IP 玳小园" loading="lazy" />
-<div class="cta"><span undefined>查看详情</span>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+<img src="assets/images/ip-daixiaoyuan.jpg" alt="角色与 IP 设计" loading="lazy" />
+<div class="cta"><span>查看详情</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
 </div>
-</div>
-<div class="meta">
-<h3>角色与 IP 设计</h3>
-<div class="tags"><span class="tag purple">玳小园</span><span class="tag">汐小知</span><span class="tag warm">蟹小满</span></div>
-</div>
+<div class="meta"><h3>角色与 IP 设计</h3><div class="tags"><span class="tag warm">玳小园</span><span class="tag warm">汐小知</span><span class="tag warm">蟹小满</span></div></div>
 </a>
-<!-- 网页交互 二十八星宿 -->
-<a class="work-card glass-card reveal" data-delay="5" data-cat="c5" href="work-web.html">
+
+<!-- 5. 网页与交互 -->
+<a class="work-card glass-card carousel-slide" data-cat="c5" href="work-web.html">
 <div class="cover">
-<img src="assets/images/constellations-screenshot.png" alt="二十八星宿网页" loading="lazy" />
-<div class="cta"><span undefined>查看详情</span>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+<img src="assets/images/constellations-screenshot.png" alt="网页与交互" loading="lazy" />
+<div class="cta"><span>查看详情</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
 </div>
-</div>
-<div class="meta">
-<h3>网页与交互</h3>
-<div class="tags"><span class="tag">HTML/CSS</span><span class="tag purple">Unity</span><span class="tag warm">Game UI</span></div>
-</div>
+<div class="meta"><h3>网页与交互</h3><div class="tags"><span class="tag">HTML / CSS</span><span class="tag">Unity</span><span class="tag">Game UI</span></div></div>
 </a>
-<!-- 长夜烬（单列做宽亮点也行，保持网格） -->
-<a class="work-card glass-card reveal" data-delay="6" data-cat="c1" href="work-motion.html">
+
+<!-- 6. 长夜烬 · AI 影像项目 -->
+<a class="work-card glass-card carousel-slide" data-cat="c1" href="work-ai-motion.html">
 <div class="cover">
-<img src="assets/images/canvas-process-night.jpg" alt="长夜烬 画布过程" loading="lazy" />
-<div class="play-pulse" aria-hidden="true">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+<img src="assets/images/canvas-process-night.jpg" alt="长夜烬 · AI 影像项目" loading="lazy" />
+<div class="play-pulse" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+<div class="cta"><span>查看详情</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
 </div>
-<div class="cta"><span>长夜烬预告片</span>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-</div>
-</div>
-<div class="meta">
-<h3>长夜烬 · AI 影像项目</h3>
-<div class="tags"><span class="tag purple">AI 短片</span><span class="tag">Canvas 过程</span></div>
-</div>
+<div class="meta"><h3>长夜烬 · AI 影像项目</h3><div class="tags"><span class="tag">AI 短片</span><span class="tag">Canvas 过程</span></div></div>
 </a>
-<!-- 商业约稿 -->
-<a class="work-card glass-card reveal" data-delay="3" data-cat="c4" href="work-ip.html">
+
+<!-- 7. 商业约稿 -->
+<a class="work-card glass-card carousel-slide" data-cat="c4" href="work-ip.html">
 <div class="cover">
 <img src="assets/images/commission-1.jpg" alt="商业约稿" loading="lazy" />
-<div class="cta"><span undefined>查看详情</span>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+<div class="cta"><span>查看详情</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
 </div>
-</div>
-<div class="meta">
-<h3>商业约稿</h3>
-<div class="tags"><span class="tag warm">Illustration</span><span class="tag">Commission</span></div>
-</div>
+<div class="meta"><h3>商业约稿</h3><div class="tags"><span class="tag">Illustration</span><span class="tag">Commission</span></div></div>
 </a>
+
+</div>
+</div>
+
+<button class="carousel-arrow next" type="button" aria-label="下一件作品">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+</button>
+
+<div class="carousel-foot">
+<div class="carousel-dots"></div>
+<div class="carousel-count"><b>01</b> / 07</div>
+</div>
+
 </div>
 </div>
 </section>
+
 <!-- ========== 技能矩阵 ========== -->
-<section class="section" style="padding-top: 60px;">
+<section class="section">
 <div class="container">
 <div class="reveal">
-<div class="eyebrow">
-<svg class="icon-star sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.2"/></svg>
-<span undefined>Creative Stack</span>
-</div>
 <h2 class="section-title">
-<span undefined>技能矩阵</span>
-<span class="en">Tools & Capabilities</span>
+<span>技能矩阵</span>
+<span class="en">Skill Matrix · Tools &amp; Pipelines</span>
 </h2>
+<p class="section-desc">4 大分组：AI 创作工具 · 设计与动效 · 游戏交互前端 · 其他能力。</p>
 </div>
-<p class="section-desc reveal" data-delay="1">把传统设计的控制力、AI 工作流的迭代速度，以及前端交互的落地能力组合在一起。</p>
-<div class="skill-groups">
+
+<div class="skill-matrix">
+
 <div class="skill-group glass-card reveal" data-delay="1">
-<h4>
-<svg class="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.2"/></svg>
-AI 创作工具
-<span class="en">AI Tools · Core</span>
-</h4>
-<p style="margin:6px 0 16px; color:var(--ink-soft); font-size:13px;">
-核心竞争力：ComfyUI 节点化工作流 + WebUI/Stable Diffusion 管线 + 即梦/可灵/Seedance/Midjourney，能从 LoRA 选型、参数调优，一直做到多模态整合输出。
-</p>
-<div class="skill-item"><div class="row"><span class="name">ComfyUI</span><span>92%</span></div><div class="bar"><div class="fill" data-val="92"></div></div></div>
-<div class="skill-item"><div class="row"><span class="name">Stable Diffusion / WebUI</span><span>88%</span></div><div class="bar"><div class="fill" data-val="88"></div></div></div>
-<div class="skill-item"><div class="row"><span class="name">LoRA 训练与运用</span><span>86%</span></div><div class="bar"><div class="fill" data-val="86"></div></div></div>
-<div class="skill-item"><div class="row"><span class="name">即梦 / 可灵 / Seedance / Midjourney</span><span>82%</span></div><div class="bar"><div class="fill" data-val="82"></div></div></div>
+<div class="sg-head">
+<h3><span style="font-family:var(--font-en); letter-spacing:.2em;">+</span> AI 创作工具</h3>
+<span class="sg-en">AI TOOLS · CORE</span>
 </div>
+<p class="sg-desc">核心竞争力：ComfyUI 节点化工作流 + WebUI/Stable Diffusion 管线 + 即梦/可灵/Seedance/Midjourney，能从 LoRA 选型、参数调优，一直做到多模态整合输出。</p>
+<div class="skill-item"><div class="row"><span class="name">ComfyUI</span><span>92%</span></div><div class="bar"><div class="fill" data-val="92" style="width: 0%;"></div></div></div>
+<div class="skill-item"><div class="row"><span class="name">Stable Diffusion / WebUI</span><span>88%</span></div><div class="bar"><div class="fill" data-val="88" style="width: 0%;"></div></div></div>
+<div class="skill-item"><div class="row"><span class="name">LoRA 训练与运用</span><span>86%</span></div><div class="bar"><div class="fill" data-val="86" style="width: 0%;"></div></div></div>
+<div class="skill-item"><div class="row"><span class="name">即梦 / 可灵 / Seedance / Midjourney</span><span>82%</span></div><div class="bar"><div class="fill" data-val="82" style="width: 0%;"></div></div></div>
+</div>
+
 <div class="skill-group glass-card reveal" data-delay="2">
-<h4>
-<svg class="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.2"/></svg>
-设计与动效
-<span class="en">Design & Motion</span>
-</h4>
-<p style="margin:6px 0 16px; color:var(--ink-soft); font-size:13px;">
-以 After Effects 为主力动效工具，Figma 负责界面和 IP 规范输出，3ds Max 承担 3D 资产建模与静帧渲染。
-</p>
-<div class="skill-item"><div class="row"><span class="name">After Effects</span><span>90%</span></div><div class="bar"><div class="fill" data-val="90"></div></div></div>
-<div class="skill-item"><div class="row"><span class="name">Figma</span><span>86%</span></div><div class="bar"><div class="fill" data-val="86"></div></div></div>
-<div class="skill-item"><div class="row"><span class="name">3ds Max</span><span>74%</span></div><div class="bar"><div class="fill" data-val="74"></div></div></div>
+<div class="sg-head">
+<h3><span style="font-family:var(--font-en); letter-spacing:.2em;">+</span> 设计与动效</h3>
+<span class="sg-en">DESIGN &amp; MOTION</span>
 </div>
+<p class="sg-desc">以 After Effects 为主力动效工具，Figma 负责界面和 IP 规范输出，3ds Max 承担 3D 资产建模与静帧渲染。</p>
+<div class="skill-item"><div class="row"><span class="name">After Effects</span><span>90%</span></div><div class="bar"><div class="fill" data-val="90" style="width: 0%;"></div></div></div>
+<div class="skill-item"><div class="row"><span class="name">Figma</span><span>86%</span></div><div class="bar"><div class="fill" data-val="86" style="width: 0%;"></div></div></div>
+<div class="skill-item"><div class="row"><span class="name">3ds Max</span><span>74%</span></div><div class="bar"><div class="fill" data-val="74" style="width: 0%;"></div></div></div>
+</div>
+
 <div class="skill-group glass-card reveal" data-delay="3">
-<h4>
-<svg class="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.2"/></svg>
-游戏 / 交互 / 前端
-<span class="en">Game · Web · UX</span>
-</h4>
-<p style="margin:6px 0 16px; color:var(--ink-soft); font-size:13px;">
-Unity 做游戏原型与交互装置，HTML/CSS 做静态站点落地，小程序开发做轻量应用与校园工具。
-</p>
-<div class="skill-item"><div class="row"><span class="name">Unity</span><span>78%</span></div><div class="bar"><div class="fill" data-val="78"></div></div></div>
-<div class="skill-item"><div class="row"><span class="name">HTML / CSS</span><span>86%</span></div><div class="bar"><div class="fill" data-val="86"></div></div></div>
-<div class="skill-item"><div class="row"><span class="name">小程序开发</span><span>72%</span></div><div class="bar"><div class="fill" data-val="72"></div></div></div>
+<div class="sg-head">
+<h3><span style="font-family:var(--font-en); letter-spacing:.2em;">+</span> 游戏 / 交互 / 前端</h3>
+<span class="sg-en">GAME · WEB · UX</span>
 </div>
+<p class="sg-desc">Unity 做游戏原型与交互装置，HTML/CSS 做静态站点落地，小程序开发做轻量应用与校园工具。</p>
+<div class="skill-item"><div class="row"><span class="name">Unity</span><span>78%</span></div><div class="bar"><div class="fill" data-val="78" style="width: 0%;"></div></div></div>
+<div class="skill-item"><div class="row"><span class="name">HTML / CSS</span><span>86%</span></div><div class="bar"><div class="fill" data-val="86" style="width: 0%;"></div></div></div>
+<div class="skill-item"><div class="row"><span class="name">小程序开发</span><span>72%</span></div><div class="bar"><div class="fill" data-val="72" style="width: 0%;"></div></div></div>
+</div>
+
 <div class="skill-group glass-card reveal" data-delay="4">
-<h4>
-<svg class="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.2"/></svg>
-其他能力
-<span class="en">Other Skills</span>
-</h4>
-<p style="margin:6px 0 16px; color:var(--ink-soft); font-size:13px;">
-视频剪辑、脚本创作、摄影基础——让作品从概念到交付可以一个人闭环推进。
-</p>
-<div class="skill-item"><div class="row"><span class="name">视频剪辑</span><span>86%</span></div><div class="bar"><div class="fill" data-val="86"></div></div></div>
-<div class="skill-item"><div class="row"><span class="name">脚本 / 文案</span><span>80%</span></div><div class="bar"><div class="fill" data-val="80"></div></div></div>
-<div class="skill-item"><div class="row"><span class="name">摄影</span><span>70%</span></div><div class="bar"><div class="fill" data-val="70"></div></div></div>
+<div class="sg-head">
+<h3><span style="font-family:var(--font-en); letter-spacing:.2em;">+</span> 其他能力</h3>
+<span class="sg-en">OTHER SKILLS</span>
 </div>
+<p class="sg-desc">视频剪辑、脚本创作、摄影基础——让作品从概念到交付可以一个人闭环推进。</p>
+<div class="skill-item"><div class="row"><span class="name">视频剪辑</span><span>86%</span></div><div class="bar"><div class="fill" data-val="86" style="width: 0%;"></div></div></div>
+<div class="skill-item"><div class="row"><span class="name">脚本 / 文案</span><span>80%</span></div><div class="bar"><div class="fill" data-val="80" style="width: 0%;"></div></div></div>
+<div class="skill-item"><div class="row"><span class="name">摄影</span><span>70%</span></div><div class="bar"><div class="fill" data-val="70" style="width: 0%;"></div></div></div>
+</div>
+
 </div>
 </div>
 </section>
-<!-- ========== 快速导航 ========== -->
-<section class="section" style="padding-top: 40px; padding-bottom: 100px;">
+
+<!-- ========== 快速导航（三次点击内到达任何角落）========== -->
+<section class="section">
 <div class="container">
 <div class="reveal">
-<div class="eyebrow">
-<svg class="icon-star sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.2"/></svg>
-<span undefined>Quick Nav</span>
-</div>
 <h2 class="section-title">
-<span undefined>快速导航</span>
-<span class="en">Jump to Anywhere in 3 Clicks</span>
+<span>快速导航</span>
+<span class="en">Quick Nav · Three Clicks to Any Corner</span>
 </h2>
+<p class="section-desc">4 大分类直通，点击即到作品列表，再选作品就是详情。</p>
 </div>
-<p class="section-desc reveal" data-delay="1">三次点击内，到达你想看的任何一个角落。</p>
-<div style="display:grid; grid-template-columns:repeat(2,1fr); gap:20px;" class="reveal-grid">
-<a href="works.html" class="glass-card reveal" data-delay="1" style="padding:28px; display:flex; flex-direction:column; gap:14px;">
-<svg class="icon-star lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.15"/></svg>
-<h3 style="margin:0; font-size:20px; font-weight:400; letter-spacing:0.12em;">作品集<span style="display:block; font-family:var(--font-en); font-size:10px; letter-spacing:0.32em; color:var(--ink-faint); margin-top:6px; text-transform:uppercase;">Portfolio</span></h3>
-<p style="margin:0; color:var(--ink-soft); font-size:13px;">6 大类 37+ 件作品，分类筛选。</p>
-</a>
-<a href="awards.html" class="glass-card reveal" data-delay="2" style="padding:28px; display:flex; flex-direction:column; gap:14px;">
-<svg class="icon-star lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.15"/></svg>
-<h3 style="margin:0; font-size:20px; font-weight:400; letter-spacing:0.12em;">荣誉<span style="display:block; font-family:var(--font-en); font-size:10px; letter-spacing:0.32em; color:var(--ink-faint); margin-top:6px; text-transform:uppercase;">Awards</span></h3>
-<p style="margin:0; color:var(--ink-soft); font-size:13px;">国家级 & 省级获奖证书。</p>
-</a>
+
+<div class="quick-nav-grid reveal-grid">
+
+<a class="glass-card reveal qn-item" data-delay="1" href="work-ai-motion.html" style="border-left:3px solid rgba(176,165,196,.6);">
+<div class="qn-tag">01</div>
+<div>
+<div class="qn-title">AI 影像与创作</div>
+<div class="qn-sub">ComfyUI · LoRA · AE 动态</div>
 </div>
-<style>
-@media (max-width:991px){ .reveal-grid{grid-template-columns:repeat(2,1fr) !important;} }
-@media (max-width:520px){ .reveal-grid{grid-template-columns:1fr !important;} }
-</style>
+</a>
+
+<a class="glass-card reveal qn-item" data-delay="2" href="work-viz.html" style="border-left:3px solid rgba(168,190,220,.6);">
+<div class="qn-tag">02</div>
+<div>
+<div class="qn-title">信息可视化</div>
+<div class="qn-sub">NCDA 国赛一等奖</div>
+</div>
+</a>
+
+<a class="glass-card reveal qn-item" data-delay="3" href="work-ip.html" style="border-left:3px solid rgba(220,182,198,.6);">
+<div class="qn-tag">03</div>
+<div>
+<div class="qn-title">角色与 IP 设计</div>
+<div class="qn-sub">玳小园 · 汐小知</div>
+</div>
+</a>
+
+<a class="glass-card reveal qn-item" data-delay="4" href="work-web.html" style="border-left:3px solid rgba(138,163,196,.6);">
+<div class="qn-tag">04</div>
+<div>
+<div class="qn-title">网页与交互</div>
+<div class="qn-sub">画皮 · 交互绘本</div>
+</div>
+</a>
+
+</div>
 </div>
 </section>
-</main>
-<!-- ========== Footer ========== -->
+
+<!-- ========== 全局底部 ========== -->
 <footer class="footer">
 <div class="container">
 <div class="stars">
@@ -329,11 +299,11 @@ Unity 做游戏原型与交互装置，HTML/CSS 做静态站点落地，小程�
 <svg class="icon-star sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.2"/></svg>
 <svg class="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.2"/></svg>
 </div>
-<p undefined>© 2026 · Crafted with care</p>
-<p undefined>Digital Media · AI Vision · Interactive</p>
+<p>© 2026 · Crafted with care</p>
+<p>Digital Media · AI Vision · Interactive</p>
 </div>
 </footer>
-<!-- ========== 通用 Lightbox ========== -->
+
 <div class="lightbox" role="dialog" aria-modal="true">
 <button class="close" aria-label="关闭"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
 <button class="nav prev" aria-label="上一张"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
@@ -341,9 +311,9 @@ Unity 做游戏原型与交互装置，HTML/CSS 做静态站点落地，小程�
 <div class="lb-stage"></div>
 <div class="counter">1 / 1</div>
 </div>
-<button class="back-top" aria-label="返回顶部">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-</button>
+
+<button class="back-top" aria-label="返回顶部"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
 <script src="js/main.js"></script>
 </body>
 </html>
