@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI 创作与技术 | 作品集详情</title>
+<meta name="description" content="AI 创作与技术：基于扣子平台独立搭建的 AI 娱乐脚本创作 Agent（Prompt 体系 + 知识库 + BadCase 治理 + 用户测试闭环）、ComfyUI 图生图工作流 + LoRA 运用详解、AI 辅助平面设计。" />
+<link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+<header class="navbar">
+<div class="nav-inner">
+<a class="brand" href="index.html"><span class="dot-star"><svg class="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.18"/><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"/></svg></span>
+<div><div class="brand-cn">作品集</div><div class="brand-en">Portfolio</div></div>
+</a>
+<ul class="nav-menu">
+<li><a href="index.html"><span class="t-cn">首页</span><span class="t-en">Home</span></a></li>
+<li><a href="works.html"><span class="t-cn">作品集</span><span class="t-en">Works</span></a></li>
+<li><a href="awards.html"><span class="t-cn">荣誉</span><span class="t-en">Awards</span></a></li>
+</ul>
+<div class="nav-actions">
+<button class="hamburger" aria-label="菜单"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div>
+</div>
+</div>
+</header>
+<main style="padding-top: calc(var(--nav-h) + 30px);">
+<section class="section" style="padding-top: 40px;">
+<div class="container">
+<a href="works.html" class="btn reveal" style="margin-bottom:26px; padding:8px 18px; font-size:12px;">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+<span undefined>返回作品集</span>
+</a>
+<div class="reveal">
+<div class="eyebrow">
+<svg class="icon-star sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.2"/></svg>
+<span>AI Creation · Category 02</span>
+</div>
+<h1 class="section-title">
+AI 创作与技术
+<span class="en">AI Agent · ComfyUI Workflow · LoRA · AI-assisted Design</span>
+</h1>
+</div>
+<div class="glass-card reveal" data-delay="1" style="padding: 32px; margin: 26px 0 48px;">
+<h3 style="margin:0 0 12px; display:flex; align-items:center; gap:10px; font-size:18px; font-weight:400; letter-spacing:0.12em;">
+<svg class="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.2"/></svg>
+<span undefined>项目概述</span>
+<span style="margin-left:auto; font-family:var(--font-en); font-size:11px; letter-spacing:0.3em; color:var(--ink-faint); text-transform:uppercase;">Overview</span>
+</h3>
+<p style="margin:0; color:var(--ink-soft); line-height:1.95;">
+以 <b style="color:var(--ink);">ComfyUI 作为工作流中枢</b>，把 Checkpoint、LoRA、ControlNet、放大节点、色彩一致性节点组织成可复用、可复现、可批量化的图生图管线；
+再配合 Stable Diffusion WebUI 做快速迭代与 LoRA 选型测试，把"创意灵感 → 可重复管线 → 批量交付"整条链路打通。
+另一条线是 <b style="color:var(--ink);">AI Agent 工具搭建</b>：在扣子平台独立完成面向短视频喜剧脚本创作的 Agent，从需求梳理、任务链路设计、Prompt 体系与知识库配置，到 BadCase 治理与多轮用户测试迭代，跑通"需求定义 → 原型上线验证"闭环。
+这两条能力在约稿和竞赛里都是核心效率杠杆：能在不牺牲风格控制力的前提下，把出图速度提升 3-5 倍，同时把参数、节点结构与 Prompt 规范沉淀下来，变成可迁移的资产。
+</p>
+<div style="margin-top:20px; display:flex; flex-wrap:wrap; gap:8px;">
+<span class="tag">ComfyUI</span><span class="tag">Stable Diffusion WebUI</span>
+<span class="tag purple">LoRA</span><span class="tag">ControlNet</span>
+<span class="tag warm">即梦 / 可灵 / Seedance / Midjourney</span>
+<span class="tag purple">扣子 AI Agent</span>
+</div>
+</div>
+<!-- ========== AI 娱乐脚本创作 Agent（扣子平台） ========== -->
+<div class="reveal" style="margin-top:8px;">
+<h3 style="display:flex; align-items:center; gap:10px; font-size:22px; font-weight:300; letter-spacing:0.12em; margin:0 0 20px;">
+<svg class="icon-star lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.15"/></svg>
+AI 娱乐脚本创作 Agent
+<span style="margin-left:auto; font-family:var(--font-en); font-size:11px; letter-spacing:0.3em; color:var(--ink-faint); text-transform:uppercase;">AI Agent · Coze</span>
+</h3>
+<p style="color:var(--ink-soft); font-size:14px; margin:0 0 6px; line-height:1.95;">
+基于扣子（Coze）平台独立搭建的 AI Agent 工具，面向短视频喜剧脚本创作；
+完整实践 <b style="color:var(--ink);">需求梳理 → 流程设计 → 原型验证 → 迭代优化</b> 的产品全流程。
+</p>
+<div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px;">
+<span class="tag purple">AI Agent</span><span class="tag">Prompt 体系</span>
+<span class="tag warm">知识库配置</span><span class="tag">BadCase 治理</span><span class="tag purple">用户测试迭代</span>
+</div>
+<!-- 预览图区域：扣子 Agent 实际截图 -->
+<div class="glass-card ai-agent-preview" data-delay="1" style="padding:14px; background:rgba(176,165,196,.03); margin-bottom:24px;">
+<div style="display:grid; grid-template-columns: 1.55fr 1fr; gap:14px; align-items:start;">
+<div>
+<img src="assets/images/agent-workflow.jpg" alt="扣子 Agent 记忆与规则体系" loading="lazy" style="width:100%; height:auto; border-radius:var(--radius-s); display:block;" />
+<div style="font-family:var(--font-en); font-size:10px; letter-spacing:.25em; color:var(--ink-faint); margin-top:8px; text-align:center;">WORKFLOW · MEMORY · RULE SYSTEM</div>
+</div>
+<div>
+<img src="assets/images/agent-chat.jpg" alt="扣子 Agent 脚本创作对话" loading="lazy" style="width:100%; height:auto; border-radius:var(--radius-s); display:block;" />
+<div style="font-family:var(--font-en); font-size:10px; letter-spacing:.25em; color:var(--ink-faint); margin-top:8px; text-align:center;">LIVE DIALOGUE · COZE APP</div>
+</div>
+</div>
+</div>
+<!-- 3 个说明块 -->
+<div style="display:flex; flex-direction:column; gap:16px;" class="ai-agent-steps">
+<div class="glass-card reveal" data-delay="2" style="padding:22px 24px;">
+<div class="tag purple" style="margin-bottom:10px;">01 · 任务链路与 Prompt 体系</div>
+<p style="margin:0; color:var(--ink-soft); font-size:13.5px; line-height:2;">
+拆解短视频创作者核心诉求，完成 Agent 任务链路设计、Prompt 体系编写、知识库配置；
+实现从用户灵感输入直接输出带场景、台词、动作、镜头提示的完整可拍摄分镜脚本。
+</p>
+</div>
+<div class="glass-card reveal" data-delay="3" style="padding:22px 24px;">
+<div class="tag warm" style="margin-bottom:10px;">02 · BadCase 治理与创作规则</div>
+<p style="margin:0; color:var(--ink-soft); font-size:13.5px; line-height:2;">
+针对大模型剧情混乱、笑点生硬等 BadCase，设计多层创作规则与内容自检机制；
+约束剧情结构、人物动机、笑点密度与镜头规范，降低使用者后期修改返工成本。
+</p>
+</div>
+<div class="glass-card reveal" data-delay="1" style="padding:22px 24px;">
+<div class="tag" style="margin-bottom:10px;">03 · 用户测试与闭环验证</div>
+<p style="margin:0; color:var(--ink-soft); font-size:13.5px; line-height:2;">
+多轮用户测试迭代，沉淀 Prompt 规范、知识库文档与交互范式；
+完成需求定义到原型上线验证闭环，验证 AI 创作工具的实际使用价值。
+</p>
+</div>
+</div>
+</div>
+<!-- ========== ComfyUI 工作流专区 ========== -->
+<div class="reveal">
+<h3 style="display:flex; align-items:center; gap:10px; font-size:22px; font-weight:300; letter-spacing:0.12em; margin:0 0 20px;">
+<svg class="icon-star lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.15"/></svg>
+<span undefined>ComfyUI 工作流详解</span>
+<span style="margin-left:auto; font-family:var(--font-en); font-size:11px; letter-spacing:0.3em; color:var(--ink-faint); text-transform:uppercase;">Workflow Deep Dive</span>
+</h3>
+</div>
+<div style="display:flex; flex-direction:column; gap:28px;" class="ai-layout">
+<!-- 工作流大图（占满宽度，固定原始比例完整显示，不裁剪、不点击放大） -->
+<div class="glass-card reveal comfyui-workflow-card" data-delay="1" style="overflow:visible; display:block; position:relative; padding: 8px;">
+<img src="assets/images/comfyui-workflow-lora.png" alt="ComfyUI 工作流大图" loading="lazy"
+     class="comfyui-workflow-img"
+     style="width:100% !important; height:auto !important; max-width:100% !important; display:block !important; object-fit:contain !important; object-position:center top !important; margin:0 auto !important;" />
+</div>
+<!-- 工作流 5 个说明块（图片下方，2 列排列） -->
+<div style="display:flex; flex-direction:column; gap:16px;" class="ai-steps">
+<div class="glass-card reveal" data-delay="2" style="padding:20px 22px;">
+<div class="tag" style="margin-bottom:10px;">01 · <span undefined>工作流类型</span></div>
+<div style="font-size:15px; color:var(--ink); letter-spacing:0.06em; margin-bottom:6px;">图生图（img2img）+ LoRA 风格嫁接</div>
+<p style="margin:0; color:var(--ink-soft); font-size:13px; line-height:1.9;">
+以草图/参考图为输入，保证构图与人物比例不漂；把"角色/质感/氛围"拆成多条 LoRA 并行控制，解决单模型风格单一问题。
+</p>
+</div>
+<div class="glass-card reveal" data-delay="3" style="padding:20px 22px;">
+<div class="tag purple" style="margin-bottom:10px;">02 · <span undefined>LoRA 模型与运用思路</span></div>
+<p style="margin:0; color:var(--ink-soft); font-size:13px; line-height:1.9;">
+习惯把 LoRA 分三层去用：<b style="color:var(--ink);">底层（角色/脸型）</b> 0.6-0.8 权重固定身份；<b style="color:var(--ink);">中层（质感）</b> 如胶片/水墨/莫兰迪色 0.3-0.5 做氛围；
+<b style="color:var(--ink);">顶层（细节）</b> 如发丝高光、皮肤纹理 0.2-0.3 做点缀。工作流中会单独加入 LoRA 开关节点，便于 A/B 对比与调参。
+</p>
+</div>
+<div class="glass-card reveal" data-delay="1" style="padding:20px 22px;">
+<div class="tag warm" style="margin-bottom:10px;">03 · <span undefined>关键节点说明</span></div>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px 18px; font-size:13px;">
+<div><b style="color:var(--ink);">采样器</b><br/><span style="color:var(--ink-soft);">DPM++ 2M Karras，20-28 步</span></div>
+<div><b style="color:var(--ink);">CFG</b><br/><span style="color:var(--ink-soft);">基础 6-8，细节强化时 9-11</span></div>
+<div><b style="color:var(--ink);">重绘幅度</b><br/><span style="color:var(--ink-soft);">0.45-0.6 保构图，0.7 以上换风格</span></div>
+<div><b style="color:var(--ink);">分辨率</b><br/><span style="color:var(--ink-soft);">生成 768² → 放大至 1536²</span></div>
+<div><b style="color:var(--ink);">放大链路</b><br/><span style="color:var(--ink-soft);">ESRGAN + 二次重绘，避免 AI 软化</span></div>
+<div><b style="color:var(--ink);">ControlNet</b><br/><span style="color:var(--ink-soft);">Canny / OpenPose / Depth 保持结构</span></div>
+</div>
+</div>
+<div class="glass-card reveal" data-delay="2" style="padding:20px 22px;">
+<div class="tag" style="margin-bottom:10px;">04 · <span undefined>输入输出对比</span></div>
+<p style="margin:0 0 10px; color:var(--ink-soft); font-size:13px; line-height:1.9;">
+输入：草图 + 风格词（Mo Lan Di / Oriental ink / Cyber low saturation）。<br/>
+输出：人物稳定 + 细节密度提升 + 噪点可控，可直接进入 AE 做二次创作。
+</p>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+<img src="assets/images/ai-graphic-design-1.jpg" alt="输出例 1" loading="lazy" style="aspect-ratio:4/3; object-fit:cover; border-radius:10px; border:1px solid var(--line);" />
+<img src="assets/images/ai-graphic-design-2.jpg" alt="输出例 2" loading="lazy" style="aspect-ratio:4/3; object-fit:cover; border-radius:10px; border:1px solid var(--line);" />
+</div>
+</div>
+<div class="glass-card reveal" data-delay="3" style="padding:20px 22px;">
+<div class="tag purple" style="margin-bottom:10px;">05 · <span undefined>AI 辅助环节</span></div>
+<ul style="margin:0; padding-left:20px; color:var(--ink-soft); font-size:13px; line-height:2;">
+<li>提示词模板库：把常用角色/氛围/光照词封装成一组组 Prompt 片段</li>
+<li>批次一致性：用种子锁定 + 小步长重绘，产出同系列几十张延展图</li>
+<li>多平台接力：即梦出人像 → WebUI 改色 → ComfyUI 合成 → 可灵 / Seedance 动起来</li>
+<li>项目复盘时保存完整工作流 JSON，下次项目可以直接迁移到新主题</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- ========== AI 辅助平面设计 ========== -->
+<div style="margin-top:84px;">
+<div class="reveal">
+<h3 style="display:flex; align-items:center; gap:10px; font-size:22px; font-weight:300; letter-spacing:0.12em; margin:0 0 10px;">
+<svg class="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.2"/></svg>
+AI 辅助平面设计
+<span style="margin-left:auto; font-family:var(--font-en); font-size:11px; letter-spacing:0.3em; color:var(--ink-faint); text-transform:uppercase;">AI-assisted Graphic</span>
+</h3>
+<p style="margin:0 0 24px; color:var(--ink-soft); font-size:14px;">
+每一件都标记了 AI 在流程中的角色：<span class="tag">构图</span> <span class="tag purple">质感</span> <span class="tag warm">元素生成</span>。
+</p>
+</div>
+<div style="display:grid; grid-template-columns:repeat(3,1fr); gap:22px;" class="ai-graph-grid">
+<a class="glass-card reveal" data-delay="1" style="overflow:hidden; display:block;" data-lb-group="ai-graphic" data-src="assets/images/ai-graphic-design-1.jpg">
+<img src="assets/images/ai-graphic-design-1.jpg" alt="AI 辅助平面 1" loading="lazy" style="aspect-ratio:4/5; object-fit:cover;" />
+<div style="padding:18px 20px 22px;">
+<div style="letter-spacing:0.1em;">平面海报 · 主视觉 A</div>
+<div style="margin-top:8px; display:flex; flex-wrap:wrap; gap:6px;">
+<span class="tag purple">Midjourney 构图</span><span class="tag warm">ComfyUI 质感统一</span>
+</div>
+</div>
+</a>
+<a class="glass-card reveal" data-delay="2" style="overflow:hidden; display:block;" data-lb-group="ai-graphic" data-src="assets/images/ai-graphic-design-2.jpg">
+<img src="assets/images/ai-graphic-design-2.jpg" alt="AI 辅助平面 2" loading="lazy" style="aspect-ratio:4/5; object-fit:cover;" />
+<div style="padding:18px 20px 22px;">
+<div style="letter-spacing:0.1em;">平面延展 · 冷调版 B</div>
+<div style="margin-top:8px; display:flex; flex-wrap:wrap; gap:6px;">
+<span class="tag">即梦 元素生成</span><span class="tag purple">WebUI 调色</span>
+</div>
+</div>
+</a>
+<a class="glass-card reveal" data-delay="3" style="overflow:hidden; display:block;" data-lb-group="ai-graphic" data-src="assets/images/ai-graphic-design-3.jpg">
+<img src="assets/images/ai-graphic-design-3.jpg" alt="AI 辅助平面 3" loading="lazy" style="aspect-ratio:4/5; object-fit:cover;" />
+<div style="padding:18px 20px 22px;">
+<div style="letter-spacing:0.1em;">海报 · 暖色氛围 C</div>
+<div style="margin-top:8px; display:flex; flex-wrap:wrap; gap:6px;">
+<span class="tag warm">Seedance 辅助构图</span>
+</div>
+</div>
+</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="container">
+<div class="stars">
+<svg class="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.2"/></svg>
+<svg class="icon-star sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.2"/></svg>
+<svg class="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="currentColor" fill-opacity="0.2"/></svg>
+</div>
+<p undefined>© 2026 · Crafted with care</p>
+<p undefined>Digital Media · AI Vision · Interactive</p>
+</div>
+</footer>
+<div class="lightbox" role="dialog" aria-modal="true">
+<button class="close" aria-label="关闭"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+<button class="nav prev" aria-label="上一张"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+<button class="nav next" aria-label="下一张"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+<div class="lb-stage"></div>
+<div class="counter">1 / 1</div>
+</div>
+<button class="back-top" aria-label="返回顶部"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<script src="js/main.js"></script>
+<style>
+@media (max-width: 1080px){ .ai-layout{grid-template-columns:1fr !important;} }
+@media (max-width: 820px){ .ai-graph-grid{grid-template-columns:1fr !important;} }
+</style>
+</body>
+</html>
